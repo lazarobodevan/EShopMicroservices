@@ -14,5 +14,26 @@ namespace Ordering.Domain.ValueObjects {
 
         public string ZipCode { get; } = default!;
 
+        protected Address() { }
+
+        private Address(string firstName, string lastName, string emailAddress, string adressLine, string country, string state, string zipCode) {
+            FirstName = firstName;
+            LastName = lastName;
+            EmailAddress = emailAddress;
+            AddressLine = adressLine;
+            Country = country;
+            State = state;
+            ZipCode = zipCode;
+        }
+
+        public static Address Of(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipcode) {
+
+            ArgumentException.ThrowIfNullOrWhiteSpace(emailAddress);
+            ArgumentException.ThrowIfNullOrWhiteSpace(addressLine);
+
+            return new Address(firstName, lastName, emailAddress, addressLine, country, state, zipcode);
+
+        }
+
     }
 }
