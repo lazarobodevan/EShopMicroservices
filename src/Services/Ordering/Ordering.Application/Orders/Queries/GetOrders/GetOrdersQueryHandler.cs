@@ -28,7 +28,7 @@ namespace Ordering.Application.Orders.Queries.GetOrders
             return new GetOrdersResult(
                 new PaginatedResult<OrderDto>(
                     pageIndex, pageSize, totalCount, orders.ToOrderDtoList())
-                 ));
+                 );
         }
     }
 }
