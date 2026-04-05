@@ -1,4 +1,5 @@
 using BuildingBlocks.Exceptions.Handler;
+using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -28,6 +29,8 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddStackExchangeRedisCache(options => {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
+
+builder.Services.AddMessageBroker(builder.Configuration);
 
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opts => {
     opts.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
